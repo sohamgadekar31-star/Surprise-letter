@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For My Mauu ❤️</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(135deg, #180b20, #3b123d, #170a24);
+    font-family: Georgia, "Times New Roman", serif;
+    color: white;
+    overflow-x: hidden;
+}
+
+/* Floating hearts */
+.floating {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.heart {
+    position: absolute;
+    bottom: -50px;
+    font-size: 22px;
+    animation: floatUp linear infinite;
+    opacity: 0.75;
+}
+
+.heart:nth-child(1) { left: 8%; animation-duration: 8s; }
+.heart:nth-child(2) { left: 20%; animation-duration: 11s; animation-delay: 2s; }
+.heart:nth-child(3) { left: 35%; animation-duration: 9s; animation-delay: 1s; }
+.heart:nth-child(4) { left: 50%; animation-duration: 12s; animation-delay: 3s; }
+.heart:nth-child(5) { left: 65%; animation-duration: 8s; animation-delay: 1s; }
+.heart:nth-child(6) { left: 78%; animation-duration: 10s; animation-delay: 4s; }
+.heart:nth-child(7) { left: 90%; animation-duration: 9s; animation-delay: 2s; }
+
+@keyframes floatUp {
+    0% {
+        transform: translateY(0) scale(0.8) rotate(0deg);
+        opacity: 0;
+    }
+    15% { opacity: 0.8; }
+    100% {
+        transform: translateY(-110vh) scale(1.4) rotate(25deg);
+        opacity: 0;
+    }
+}
+
+/* Main */
+.container {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 18px;
+}
+
+/* Intro */
+.intro {
+    text-align: center;
+    margin-bottom: 35px;
+    animation: fadeIn 2s ease;
+}
+
+.intro h1 {
+    font-size: clamp(30px, 8vw, 52px);
+    color: #ffd6e7;
+    text-shadow: 0 0 20px rgba(255, 130, 180, 0.5);
+}
+
+.intro p {
+    margin-top: 10px;
+    color: #f3c9da;
+    font-size: 16px;
+}
+
+/* Envelope */
+.envelope-area {
+    width: min(340px, 90vw);
+    height: 230px;
+    position: relative;
+    cursor: pointer;
+    perspective: 1000px;
+}
+
+.envelope {
+    position: absolute;
+    width: 100%;
+    height: 190px;
+    bottom: 0;
+    background: #f6b7ce;
+    border-radius: 8px;
+    box-shadow: 0 15px 45px rgba(0,0,0,0.45);
+}
+
+.envelope::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    border-left: 170px solid #e998b5;
+    border-top: 95px solid transparent;
+    border-bottom: 95px solid transparent;
+    z-index: 3;
+}
+
+.envelope::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    border-right: 170px solid #e998b5;
+    border-top: 95px solid transparent;
+    border-bottom: 95px solid transparent;
+    z-index: 3;
+}
+
+.flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-left: 170px solid transparent;
+    border-right: 170px solid transparent;
+    border-top: 105px solid #ffcadc;
+    transform-origin: top;
+    transition: transform 1s ease;
+    z-index: 5;
+}
+
+.letter-preview {
+    position: absolute;
+    width: 85%;
+    height: 155px;
+    left: 7.5%;
+    top: 18px;
+    background: #fffafc;
+    border-radius: 5px;
+    color: #64233f;
+    text-align: center;
+    padding: 25px 10px;
+    z-index: 2;
+    transition: transform 1.2s ease;
+}
+
+.letter-preview span {
+    font-size: 30px;
+}
+
+.envelope.open .flap {
+    transform: rotateX(180deg);
+}
+
+.envelope.open .letter-preview {
+    transform: translateY(-135px);
+}
+
+.tap {
+    text-align: center;
+    margin-top: 20px;
+    color: #ffc8dc;
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    50% { opacity: 0.5; }
+}
+
+/* Letter */
+.letter {
+    display: none;
+    width: min(720px, 94vw);
+    background: #fffafc;
+    color: #432333;
+    border-radius: 18px;
+    padding: 30px 24px;
+    box-shadow: 0 20px 70px rgba(0,0,0,0.5);
+    animation: letterReveal 1.2s ease forwards;
+}
+
+@keyframes letterReveal {
+    from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.letter h2 {
+    text-align: center;
+    color: #b32e65;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.letter p {
+    font-size: 17px;
+    line-height: 1.75;
+    margin-bottom: 17px;
+}
+
+.highlight {
+    color: #b32e65;
+    font-weight: bold;
+}
+
+/* Photo */
+.photo-section {
+    margin: 25px 0;
+    text-align: center;
+}
+
+.photo-section img {
+    width: min(100%, 450px);
+    max-height: 430px;
+    object-fit: cover;
+    border-radius: 15px;
+    border: 4px solid #f2aec9;
+    box-shadow: 0 10px 35px rgba(150, 40, 90, 0.25);
+}
+
+.photo-caption {
+    margin-top: 10px;
+    color: #9b4168;
+    font-style: italic;
+}
+
+/* Final */
+.final {
+    text-align: center;
+    margin-top: 25px;
+    padding-top: 20px;
+    border-top: 1px solid #edc5d5;
+}
+
+.final h3 {
+    font-size: 28px;
+    color: #b32e65;
+    margin-bottom: 8px;
+}
+
+.final p {
+    margin-bottom: 0;
+}
+
+/* Restart */
+.restart {
+    margin-top: 25px;
+    border: none;
+    background: #b32e65;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.restart:hover {
+    background: #8f2452;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@media (max-width: 500px) {
+    .letter {
+        padding: 25px 18px;
+    }
+
+    .letter p {
+        font-size: 16px;
+        line-height: 1.65;
+    }
+
+    .envelope::before {
+        border-left-width: 50%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- Floating hearts -->
+<div class="floating">
+    <div class="heart">❤️</div>
+    <div class="heart">💗</div>
+    <div class="heart">✨</div>
+    <div class="heart">💕</div>
+    <div class="heart">💖</div>
+    <div class="heart">✨</div>
+    <div class="heart">❤️</div>
+</div>
+
+<div class="container">
+
+    <div class="intro">
+        <h1>For My Mauu ❤️</h1>
+        <p>I have something I want to tell you...</p>
+    </div>
+
+    <!-- Envelope -->
+    <div id="envelopeArea">
+        <div class="envelope-area" onclick="openLetter()">
+            <div class="envelope" id="envelope">
+
+                <div class="letter-preview">
+                    <span>💌</span>
+                    <p>A little letter<br>for someone special...</p>
+                </div>
+
+                <div class="flap"></div>
+
+            </div>
+        </div>
+
+        <div class="tap">Tap the envelope 💌</div>
+    </div>
+
+    <!-- Letter -->
+    <div class="letter" id="letter">
+
+        <h2>Dear Mauu ❤️</h2>
+
+        <p>
+            Hey Mauu, I honestly don't know what's been going on with me lately,
+            but one thing I'm completely sure about is that I really,
+            really care about you. ❤️
+        </p>
+
+        <p>
+            I know I'm not always good at expressing my feelings or putting
+            everything I feel into words, but I hope you know that I genuinely
+            care about your feelings. Your happiness, your peace, and the way
+            you feel matter a lot to me.
+        </p>
+
+        <p>
+            You're much more precious to me than you probably realize.
+            I don't want to lose you, Mauu. I don't want to imagine you being
+            with someone else. I just want you to be with me, until we're old
+            and annoying each other, and aaji and baba are still there to see
+            us together. 🥺❤️
+        </p>
+
+        <p>
+            I'm really sorry, babyy, for all the times I've hurt you
+            unknowingly. I never wanted to make you feel bad or make you
+            question how much you mean to me.
+        </p>
+
+        <p>
+            I know saying sorry can't change everything, but I genuinely want
+            to understand you better and be better for you.
+        </p>
+
+        <p>
+            Sometimes I may not know how to show it properly, but
+            <span class="highlight">I love you more than I can explain.</span>
+            You've become such an important part of my life, and I don't want
+            to take that for granted.
+        </p>
+
+        <p>
+            I just want us to find our way back to that comfort, that closeness,
+            and that happiness we had. I want to be someone you can feel safe
+            with, someone you can talk to without hesitation, and someone who
+            will always care about your feelings.
+        </p>
+
+        <!-- PHOTO SECTION -->
+        <div class="photo-section">
+
+            <!--
+                PHOTO OPTION:
+                Put your photo in the same folder as this HTML file
+                and name it "our-photo.jpg"
+
+                Or change the src below to your image filename.
+            -->
+
+            <img src="our.png" alt="Our special memory">
+
+            <div class="photo-caption">
+                One of my favourite memories with you ❤️
+            </div>
+
+        </div>
+
+        <div class="final">
+            <h3>I loveee youuu more, Mauuu ❤️</h3>
+
+            <p>
+                And honestly, I'm missing your hugs, your kisses,
+                your presence, and just having you close to me so much right now. 🥺🫂❤️
+            </p>
+
+            <p>
+                No matter how difficult things feel sometimes,
+                please remember that you're precious to me, babyy.
+                <span class="highlight">More than you know. ❤️</span>
+            </p>
+        </div>
+
+        <div style="text-align:center;">
+            <button class="restart" onclick="restartLetter()">
+                Read it again 💌
+            </button>
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+function openLetter() {
+
+    const envelope = document.getElementById("envelope");
+    const envelopeArea = document.getElementById("envelopeArea");
+    const letter = document.getElementById("letter");
+
+    envelope.classList.add("open");
+
+    setTimeout(() => {
+        envelopeArea.style.display = "none";
+        letter.style.display = "block";
+    }, 1500);
+}
+
+function restartLetter() {
+
+    const envelope = document.getElementById("envelope");
+    const envelopeArea = document.getElementById("envelopeArea");
+    const letter = document.getElementById("letter");
+
+    letter.style.display = "none";
+    envelope.classList.remove("open");
+
+    setTimeout(() => {
+        envelopeArea.style.display = "block";
+    }, 300);
+}
+
+</script>
+
+</body>
+</html>
